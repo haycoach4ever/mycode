@@ -62,8 +62,8 @@
              ansible.builtin.fail:
                msg: "MAINTENANCE PHASE - FAILED. Rollback complete. Exiting..."
 
-    - name: Inject a fail
-      ansible.builtin.shell: "/bin/false"
+#    - name: Inject a fail
+#      ansible.builtin.shell: "/bin/false"
 
     - name: POSTCHECK PHASE
       block:
@@ -92,6 +92,9 @@
            - name: MAINTENANCE PHASE - FAILED
              ansible.builtin.fail:
                msg: "POSTCHECK PHASE - FAILED. Rollback complete. Exiting..."         
+
+    - name: Inject a fail
+      ansible.builtin.shell: "/bin/false"
 
         ## in a real deployment you might consider an ALWAYS section to provide the results
         ## of how the playbook ran
