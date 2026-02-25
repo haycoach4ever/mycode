@@ -1,0 +1,38 @@
+---
+- hosts: planetexpress
+  become: true
+
+  vars_files:
+    - ~/mycode/vars/wed_challenge_names.yml
+
+  tasks:
+    - name: create users
+      user:
+        name: "{{ item.wednesday }}"
+        state: present
+      loop: "{{ item.wednesday }}"
+
+    - name: create groups
+      group:
+        name: "{{ item.wednesday }}"
+        state: present
+      loop: "{{ item.wednesday }}"
+
+    - name: Debug user details
+      debug:
+        msg: "Created user {{ item.wednesday }}"
+      loop: "{{ item.wednesday }}"
+
+   tasks:
+   - name: Install figlet
+     ansible.builtin.packages:
+       name:
+         - figlet
+         - sl
+       state: present
+     become: yes
+
+    tasks:
+    - name: Print 
+        debug:
+          msg: "I've completed the challenge!"
