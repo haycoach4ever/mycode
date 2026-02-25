@@ -1,0 +1,27 @@
+---
+- name: Create new directories
+  hosts: planetexpress:!farnsworth
+  connection: ssh
+  become: yes
+  gather_facts: yes
+
+  vars_prompt:
+  - name: "userinput"
+    prompt: "Please enter new directory name."
+    confirm: yes
+    default: "new_default"
+
+  tasks:
+  - name: "Create directory"
+    become_user: root
+    become: true
+    file:
+      path: "/home/20242502/{{ userinput }}"
+      state: directory
+      owner: student
+      group: student
+      mode: "0777"
+
+  - name: "Display directory"
+    debug:
+      msg: "Your directory has been created - /home/20242502/{{ userinput }}"
